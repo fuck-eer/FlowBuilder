@@ -1,0 +1,12 @@
+//!JUST A NAIVE WAY TO CREATE IDs SHOULD'VE USED UUID INSTEAD, But since the use-case is small.
+const generateRandomString = function (length: number) {
+	let text = "";
+	const possible =
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	for (let i = 0; i < length; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+};
+export default generateRandomString;

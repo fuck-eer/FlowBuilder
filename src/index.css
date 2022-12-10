@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	margin: 0;
+	font-family: "Josefin Sans", -apple-system, "Bebas Neue" BlinkMacSystemFont,
+		"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.react-flow__handle-connecting::after {
+	animation: popup 2s ease-in-out forwards;
+	position: absolute;
+	content: "❌";
+	font-size: 8px;
+	display: flex;
+	height: max-content;
+	justify-content: center;
+	align-items: center;
+	top: -14px;
+	left: -12px;
+	transform: translateY(-20%);
+}
+.react-flow__handle-valid::after {
+	content: "";
+	display: none;
+}
+.cls-1 {
+	fill: #f18805;
+}
+
+.cls-2 {
+	fill: #f72585;
+}
+
+@keyframes popup {
+	0%,
+	50%,
+	100% {
+		opacity: 0;
+	}
+	75%,
+	25% {
+		opacity: 1;
+	}
+}
+.logoSeeSaw {
+	animation: logoSeeSaw 8s ease-in-out infinite alternate;
+}
+@keyframes logoSeeSaw {
+	0% {
+		rotate: -8deg;
+	}
+	50% {
+		rotate: 0deg;
+	}
+	100% {
+		rotate: 8deg;
+	}
+}
