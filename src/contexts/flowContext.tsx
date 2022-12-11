@@ -51,7 +51,7 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
 
   //! Reset currently selected node on nodes state change
   useEffect(() => {
-    onResetCurrent();
+    setCurrentNode(undefined);
   }, [nodes.length]);
 
   //! For alert banner
@@ -60,12 +60,17 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
   //! All the functions below were memoized via useCallback for referential stability (AKA: to minimize unnecessary rerenders)
   //! Checking if state is valid, by seeing if there is more than one free node without any source or target 🎯
   const checkValidityOnSave = useCallback(() => {
-    const nodesSet = new Set<string>();
+    const nodesSourceSet = new Set<string>();
+    const nodesTargetSet = new Set<string>();
     edges.forEach((edge) => {
-      nodesSet.add(edge.source);
-      nodesSet.add(edge.target);
+      nodesSourceSet.add(edge.source);
+      nodesTargetSet.add(edge.target);
     });
-    if (nodesSet.size !== nodes.length) {
+
+    if (nodesSourceSet.size < nodes.length - 1) {
+      return false;
+    }
+    if (nodesTargetSet.size < nodes.length - 1) {
       return false;
     }
     return true;
@@ -109,16 +114,12 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
     [currentNode?.id, setNodes],
   );
 
-  const onResetCurrent = useCallback(() => {
-    setCurrentNode(undefined);
-  }, []);
-
   //! Save data to local storage for reloads and stuff (You know just like a cloud.LOL) ⛅
   const onSave = useCallback(() => {
     const flowData = { nodes, edges, time: new Date().getTime() };
     localStorage.setItem('FlowData', JSON.stringify(flowData));
     onToast('Data Saved Successfully', 'blue-1', true);
-  }, [nodes, edges]);
+  }, [nodes, edges, onToast]);
 
   //! this is getting data back from local storage
   const onResetFromLocalStorage = useCallback(() => {
@@ -139,7 +140,7 @@ export const FlowContextProvider = ({ children }: { children: React.ReactNode })
       }
     };
     getData();
-  }, []);
+  }, [setEdges, setNodes, onToast]);
   return (
     <FlowContext.Provider
       value={{
