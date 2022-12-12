@@ -1,4 +1,8 @@
-## Useful links:
+# Useful links:
 
-- Live Preview[https://sendn0des.web.app/]
-- Implementation with Next.js SSR with dummy sessions and link sharing capabilities. link[https://github.com/fuck-eer/flow-builder-next]
+## Next Project with link sharing, SSR,Firebase RTDB and better session management:
+- `Github`=> [https://github.com/fuck-eer/flow-builder-next]
+- `Live Preview` => [https://flow-builder-next.vercel.app]
+
+#### Base Project
+- Live Preview of this base app [https://sendn0des.web.app/]
